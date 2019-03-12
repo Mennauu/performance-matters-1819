@@ -3,19 +3,21 @@ const utils = require('./utils.js')
 
 exports.homePage = async (req, res) => {
   try {
+    // Get all the objects (with all data)
     const objects = await data.objects()
-    const subjects = utils.uniqueSubjects(objects)
-    const images = utils.imageList(objects)
-
-    console.log(images)
+    // Array with only unique genres
+    const genres = utils.uniqueSubjects(objects)
+    // Array with images
+    const images = utils.filterImages(objects)
+    // Object with unique genres and linked image
+    const imageAndGenre = utils.filterObjects(genres, images)
 
     res.render('home', {
-      image: images[0],
-      data: objects,
-      subjects: subjects,
-      layout: 'default', 
+      data: imageAndGenre,
+      layout: 'default',
       template: 'home-template',
     })
+
 
     // // Get all unique subjects
     // const subjects = uniqueSubjects(data)
@@ -25,11 +27,11 @@ exports.homePage = async (req, res) => {
     // renderHome(subjects, images)
   } catch (err) {
     throw err
-  // } finally {
-  //   removeLoadingAnimation()
-  // }
+  } finally {
+    // removeLoadingAnimation()
   }
 }
+
 
 // exports.subjectPage = async (name) => {
 //   try {
