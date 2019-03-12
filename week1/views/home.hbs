@@ -1,0 +1,12 @@
+<header>
+  <h1>Ontdek luisterboeken bij de OBA</h1>
+</header>
+
+<section>
+{{#each data}}
+  <a href="{{this.link}}" class="subject">
+    <img src="{{this.image}}" alt="{{this}}">
+    <span>{{this}}</span>
+  </a>
+{{/each}}
+</section>
