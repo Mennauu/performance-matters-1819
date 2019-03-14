@@ -56,7 +56,7 @@ ul {
   list-style-type: none;
  }
 
-main {padding: 0.5em}
+main {padding: 0.4rem}
 
 input {font-size: 1rem; }
 input::placeholder {
@@ -64,8 +64,8 @@ input::placeholder {
   font-size: 0.8rem;
 }
 
-hgroup,
-section {
+section,
+header {
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -123,52 +123,14 @@ span {
 }
 
 /********************************
-*         4. Top Header         *
-*********************************/
-[role="banner"] {
-  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
-  padding: .5em;
-  display: flex;
-}
-
-[role="banner"] img {
-  max-height: 1.5em;
-  margin-right: 1em;
-}
-
-[role="banner"] input {
-  border: 0;
-  width: 100%;
-  position: relative;
-}
-
-[role="banner"] input:hover {
-  outline: 0;
-}
-
-/********************************
 *         4. Content            *
 *********************************/
-section:first-of-type, 
-.loader {
+
+/***** 4.1 Home *****************/           
+.home-template section {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-}
-
-.loader {
-  animation: breathing 5s ease-out infinite normal;
-  max-width: 1200px;
-  margin: auto;
-}
-
-.loader-title {
-  height: 3.5em;
-  background-color: var(--dark-gray);
-  width: 60%;
-  margin: 1.5em 0 1.5em .5em;
-  animation: breathing 5s ease-out infinite normal;
-  border-radius: var(--border-radius);
 }
 
 .subject {
@@ -213,71 +175,7 @@ section:first-of-type,
   transition: filter .5s;
 }
 
-.green {box-shadow: 3.5px 3.5px 1px var(--green);}
-.red {box-shadow: 3.5px 3.5px 1px var(--red);}
-
-.green-text {color: var(--green);}
-.red-text {color: var(--red);}
-
-/* book detail page */
-.book {
-  background-color: var(--white);
-  border-radius: var(--border-radius);
-  display: block!important;
-  overflow: auto;
-  position: relative;
-  margin-top: 5em;
-}
-
-.book small {
-  color: var(--dark-gray);
-  margin-bottom: 1em;
-  font-size: 1em;
-}
-
-.book span:last-of-type {
-  margin-bottom: 2em;
-}
-
-.book img { 
-  float: left; 
-  margin-right: 1em; 
-  width: 25%;
-}
-
-.book p {
-  font-style: italic;
-  font-size: 1.3em;
-}
-
-.book h2 {
-  margin: 0;
-  font-size: 2.5em;
-}
-
-.book h3 {
-  color: var(--dark-gray);
-  font-size: 1.06em;
-  margin: 0 0 0.8em 0;
-}
-
-.book a {
-  font-weight: normal;
-  color: var(--white);
-  background-color: var(--blue)!important;
-  padding: .5em;
-  border-radius: var(--border-radius);
-  margin-bottom: 1em;
-  transition: .5s;
-}
-
-.book a:hover {
-  text-decoration: none;
-  background-color: #34495e;
-}
-
-/* list page */
-.list {display: block!important;}
+/***** 4.2 subject *****************/
 .list-item {
   background-color: var(--light-gray);
   padding: 1em;
@@ -293,51 +191,49 @@ section:first-of-type,
   text-decoration: none;
 }
 
-.list img {
+.list-item img {
   float: left;
   margin-right: 1em;
 }
 
-.call-to-action {
-  font-weight: normal;
-  color: var(--white);
-  background-color: var(--blue)!important;
-  padding: .7em;
+/***** 4.3 detail *****************/
+.book small {margin-bottom: 1em;}
+
+.book img { 
+  float: left; 
+  margin-right: 1em; 
+  width: 15%;
+}
+
+.book p {font-style: italic;}
+.book h2 {margin: 0;}
+.book h3 {
+  color: var(--dark-gray);
+  margin: 0 0 0.8em 0;
+}
+
+/***** 4.4 loading *****************/
+.loader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.loader {
+  animation: breathing 5s ease-out infinite normal;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.loader-title {
+  height: 3.5em;
+  background-color: var(--dark-gray);
+  width: 60%;
+  margin: 1.5em 0 1.5em .5em;
+  animation: breathing 5s ease-out infinite normal;
   border-radius: var(--border-radius);
-  margin-bottom: 2.5em;
-  transition: .5s;
-  display: inline-block;
 }
 
-.call-to-action:hover {
-  text-decoration: none;
-  background-color: #34495e!important;
-}
-
-.wikipedia div {
-  background-color: var(--light-gray);
-  padding: 1em;
-  margin-top: 2em;
-  overflow: auto;
-  width: 70%;
-  float: left;
-  margin-bottom: 5em;
-}
-
-.wikipedia img {
-  width: 200px;
-  border-radius: var(--border-radius);
-  float: left;
-  margin-right: 1em;
-}
-
-.wikipedia h1 {
-  margin-top: 0;
-  margin-bottom: .2em;
-  font-size: 2em;
-}
-
-/* Keyframe animations */
 @keyframes breathing {
   0% {transform: scale(0.98);}
   25% {transform: scale(1);}

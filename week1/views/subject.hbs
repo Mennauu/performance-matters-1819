@@ -1,0 +1,14 @@
+<header>
+  <h1>{{title}}</h1>
+</header>
+
+<section>
+  {{#each data}}
+    <a href="{{genre}}/{{isbn}}" class="list-item">
+      <img src="{{cover_image}}" alt="{{title}}">
+      <h2>{{title}}</h2>
+      <p>{{description}}</p>
+      <small><strong>{{author}}</strong> • {{publication_year}} • {{language}} • {{description_physical}}</small>
+    </a>
+  {{/each}}
+</section>

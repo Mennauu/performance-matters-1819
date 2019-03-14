@@ -16,7 +16,7 @@ exports.uniqueSubjects = (objects) => {
 
   objects.data.map(result => {
     if (result.genre !== null)
-      values.push(result.genre)
+      values.push(result.genre.replace(/\//g, ' '))
     subjects = [...new Set(values)]
   })
 
@@ -29,7 +29,6 @@ exports.filterImages = (data) => {
 
   data.data.map(result => {
     if (result.cover_image !== null && result.cover_image.toString('hex', 0, 4) !== '47494638') {
-      console.log(result.cover_image.type)
       values.push(result.cover_image)
       images = [...new Set(values)]
     }
@@ -38,15 +37,14 @@ exports.filterImages = (data) => {
   return images
 }
 
-/* Array with unique subjects */
-exports.subjectData = (data, name) => {
+exports.subjectData = (data, path) => {
   let objects = []
 
-  for (const object of data) {
-    if (object.subject === name) {
-      objects.push(object)
+  data.data.map(result => {
+    if (result.isbn !== null && result.genre === path) {
+      objects.push(result)
     }
-  }
+  })
 
   return objects
 }
@@ -61,10 +59,14 @@ exports.removeLoadingAnimation = () => {
   }
 }
 
-exports.bookData = (data, name) => {
-  for (const object of data) {
-    if (object.title === name) {
-      return object
+exports.bookData = (data, isbn) => {
+  let object = []
+
+  data.data.map(result => {
+    if (result.isbn === isbn) {
+      object.push(result)
     }
-  }
+  })
+
+  return object
 }
