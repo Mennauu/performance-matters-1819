@@ -112,6 +112,36 @@ You can achieve a slow network connection by opening your console and navigating
 #### Examples
 Once again I was very curious how fast smashingmagazine.com would load on a slow 3G network connection. It took 9 seconds to load everything, which is very fast! However, it loads everything at the same time, as if the entire page is loaded asynchronous. It could only show HTML first, and afterwards load CSS.
 
+## Optimalisation
+* Kijk naar NPM scripts
+* Kijk naar gulp of nieuwere tools dan Gulp
+
+
+HET BUILDEN VAN DE HELE APP VIA NPM
+
+
+- Minification
+- file revisioning (rev-manifest)
+- Brotli ipv GZIP
+- precompression (Static site)
+- img revision tag (304 - 200)
+- srcset and sizes attributes 
+- Picture html tag (client hints) - webp met fallbacks
+- Resource hints
+- DNS-PREFETCH
+- link preconnect, prefetch, preload, prerender
+- font subsetting
+- font rendering controls (font-display: swap)
+- Reflow verminderen door op de fallback font line-height en letter-spacing te plaatsen (Font style Matcher)
+- fontFaceObserver (add class async (after font is loaded)) with a cookie and class
+- Defer, async scripts
+- Je kan styles asynchroon inladen (LoadCSS)
+- Critical CSS - minimum css nodig (lijn trekken)
+
+
+
+
+
 <!-- What external data source is featured in your project and what are its properties 🌠 -->
 ## Data
 

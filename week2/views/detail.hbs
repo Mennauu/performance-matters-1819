@@ -1,0 +1,14 @@
+<header>
+  <h1>{{title}}</h1>
+</header>
+
+<section class="book">
+  {{#each data}}
+  <img src="{{cover_image}}" alt="{{title}}">
+  <h2>{{title}}</h2>
+  <p>{{description}}</p>
+  <small><strong>{{author}}</strong> • {{publication_year}} • {{language}} • {{description_physical}}</small>
+  <span><strong>ISBN:</strong> {{isbn}}</span>
+  <span><strong>PICA:</strong> {{pica}}</span>
+  {{/each}}
+</section>
