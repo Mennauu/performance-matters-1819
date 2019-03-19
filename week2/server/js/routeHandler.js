@@ -8,7 +8,7 @@ exports.homePage = async (req, res) => {
     const images = await utils.filterImages(objects)
     const imageAndGenre = await utils.filterObjects(genres, images)
 
-    res.set('Cache-Control', 'no-cache')
+    // res.set('Cache-Control', 'no-cache')
     res.render('home', {
       data: imageAndGenre,
       layout: 'default',

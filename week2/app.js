@@ -1,13 +1,17 @@
 const express = require('express')
 const hbs = require('express-handlebars')
-const terser = require('terser')
-const compression = require('compression')
+const shrinkRay = require('shrink-ray-current');
+// const terser = require('terser')
+// const compression = require('compression')
 const routeHandler = require('./server/js/routeHandler.js')
 const app = express()
 const port = 3000
 
-// gzip files
-app.use(compression())
+// gzip files compression
+// app.use(compression())
+
+// Brotli files compression
+app.use(shrinkRay())
 
 // serve static files
 app.use(express.static(__dirname + '/public', {

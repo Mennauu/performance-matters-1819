@@ -1,36 +1,32 @@
 /********************************
-***                           ***
-******      Stylesheet     ******
-***                           ***
-* Copyright (c) 2019 menno.work *
+  1. Imports     
 *********************************/
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:400,700');
 
 /********************************
-*      1. Custom properties     *
+  2. Custom properties     
 *********************************/
 :root {
   /* colors */
  --white: #fff;
- --light-gray: #f2f2f2;
- --gray: #BEBEBE;
- --dark-gray: #443F45;
+ --gray-light: #f2f2f2;
+ --gray: #bebebe;
+ --gray-dark: #443F45;
  --black: #212529;
  --green: #2ecc71;
  --brown: #a0522d;
  --red: #e74c3c;
  --blue: #2c3e50;
- --tomato: #e74c3c;
- --roasted: #262626;
 
  /* Fonts */
- --font-nt-sans: "Nunito Sans", Calibri, sans-serif;
+ --font-nt-sans: "Nunito Sans", sans-serif;
 
  /* Style */
  --border-radius: 5px;
 }
 
 /********************************
-*           2. Base             *
+  3. Base 
 *********************************/
 *,
 *::before,
@@ -71,7 +67,7 @@ header {
 }
 
 /********************************
-*        3. Typography          *
+  4. Typography   
 *********************************/
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-nt-sans);
@@ -123,10 +119,10 @@ span {
 }
 
 /********************************
-*         4. Content            *
+  5. Content
 *********************************/
 
-/***** 4.1 Home *****************/           
+/***** 5.1 Home *****************/           
 .home-template section {
   display: flex;
   flex-wrap: wrap;
@@ -175,9 +171,9 @@ span {
   transition: filter .5s;
 }
 
-/***** 4.2 subject *****************/
+/***** 5.2 subject *****************/
 .list-item {
-  background-color: var(--light-gray);
+  background-color: var(--gray-light);
   padding: 1em;
   display: block!important;
   overflow: auto;
@@ -196,7 +192,7 @@ span {
   margin-right: 1em;
 }
 
-/***** 4.3 detail *****************/
+/***** 5.3 detail *****************/
 .book small {margin-bottom: 1em;}
 
 .book img { 
@@ -208,11 +204,11 @@ span {
 .book p {font-style: italic;}
 .book h2 {margin: 0;}
 .book h3 {
-  color: var(--dark-gray);
+  color: var(--gray-dark);
   margin: 0 0 0.8em 0;
 }
 
-/***** 4.4 loading *****************/
+/***** 5.4 loading *****************/
 .loader {
   display: flex;
   flex-wrap: wrap;
@@ -227,7 +223,7 @@ span {
 
 .loader-title {
   height: 3.5em;
-  background-color: var(--dark-gray);
+  background-color: var(--gray-dark);
   width: 60%;
   margin: 1.5em 0 1.5em .5em;
   animation: breathing 5s ease-out infinite normal;
