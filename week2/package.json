@@ -16,6 +16,7 @@
     "express-handlebars": "^3.0.2",
     "express-minify-html": "^0.12.0",
     "handlebars": "^4.1.0",
+    "shrink-ray-current": "^3.0.2",
     "terser": "^3.17.0"
   }
 }

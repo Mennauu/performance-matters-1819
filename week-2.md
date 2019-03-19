@@ -1,5 +1,3 @@
-# test branch
-
 # Opdrachten Week 2
 Minor Web Development - Performance Matters
 

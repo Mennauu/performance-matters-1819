@@ -77,48 +77,97 @@ git clone https://github.com/Mennauu/performance-matters-1819
 ```
 4. 
 
-## Feature research
-The goal is to research at least two features that are being used on websites and figure out what impact these features have on sites I, and you, know and use normally.
+## Optimalisations
 
-### JavaScript
-Websites without JavaScript.
+### First view
 
-#### Problems
-The biggest problem right now is that most modern websites use JavaScript as of today (11-03-2019). Websites are build in JavaScript frameworks, like react or vue. When this is the case, disabling JavaScript means that literally nothing is being shown; sometimes only an error message displaying "Enable JavaScript to use this website".
+#### Compression
+The first thing I did was add compression. Brotli compression seems to be the most efficient.
+```diff
++ HTML improvement 71,4%
++ CSS improvement: 54,8%
+```
+<details>
+  <summary>Network results based on a slow 3G network</summary>
 
-There is a portion of people that deliberately turned off JavaScript: [0.2% of pageviews from worldwide traffic across all devices in the fourt quarter 2016 had JavaScript disabled.](https://blockmetry.com/blog/javascript-disabled). When your website relies on JavaScript, this portion won't be able to use your website. 
+**Without compression**
+```
+HTML: Size 4.2 KB | Time 2.09s
+CSS: Size 3.1 KB | Time 2.27s
 
-JavaScript requires a stable internet connection to load properly. If your user has a poor internet connection, your website might take too long to load, making the user retreat from your website.
+27 requests | 109 KB transferred | Finish 13.49s | DOMContentLoaded: 2.10s | Load 11.47s
+```
 
-#### How to achieve
-In all browsers you can turn off JavaScript in the browser settings. You can follow the steps, for your specific browser, on this page: [WikiHow: Disable JavaScript](https://www.wikihow.com/Disable-JavaScript) to turn off JavaScript.
+**With Gzip**
+```
+HTML: Size 1.2 KB | Time 2.01s
+CSS: Size 1.4 KB | Time 2.04s
 
-#### Examples
-The first website I wanted to try without JavaScript is a site I created myself: abc-legal.com. Turns out, the website works loads extremely fast without JavaScript and looks nearly identical. The two things that don't work are slideshows and the ability to change from language. We could solve those problems by showing a static image for the slideshow, and hard-linking the different languages options (these are being loaded dynamically by JavaScript, right now).
+27 requests | 105 KB transferred | Finish 13.40s | DOMContentLoaded: 2.06s | Load 11.38s
+```
 
-The second website I went to was ark.io. I know this website is made using Vue.JS, and guess what, nothing loads! You are left with a blank page. They don't even provide you with an error message.
+**With Brotli**
+```
+HTML: Size 1.0 KB | Time 2.01s
+CSS: Size 1.4 KB | Time 2.03s
 
-The last website I decided to visit was smashingmagazine.com, because Vitaly (our previous teacher) was part of making it, and is all for using CSS over JavaScript - and is hyped about a great User Experience, for all users. Damn, this website is really, really good without JavaScript. Functionalities that need JavaScript to work are not being shown. The search bar is replaced with a Smashing Magazine Google Search - so you can still use the search functionality, without JavaScript. The only downside I could find is that images from the authors are not loaded. They are loaded through JavaScript.
+27 requests | 105 KB transferred | Finish 13.24s | DOMContentLoaded: 2.06s | Load 11.22s
+```
+</details>
 
-### Broadband
-Load websites by simulating a slow 3G network connection.
+#### Minifying
+I don't use JavaScript (client-side) so the only meaningful files to minify are css files.
 
-#### Problems
-If the functionality from your website takes to long to load on a slow network connection, the user will retreat from your website.
+```diff
++ Improvement: 17,7%
+```
+<details>
+  <summary>Network results based on a slow 3G network</summary>
 
-#### How to achieve
-You can achieve a slow network connection by opening your console and navigating to "Network". Once there you can click on "Online" with the arrow pointing down, and choose a preset, like 3G slow.
+**Not minified**
+```
+Size: 1.7 KB | Time: 2.25s
+```
 
-#### Examples
-Once again I was very curious how fast smashingmagazine.com would load on a slow 3G network connection. It took 9 seconds to load everything, which is very fast! However, it loads everything at the same time, as if the entire page is loaded asynchronous. It could only show HTML first, and afterwards load CSS.
+**Minified**
+```
+Size: 1.4 KB | Time: 2.08s
+```
+</details>
 
-## Optimalisation
+#### Images to WebP
+Support is weak for WebP, but that doesn't mean we shouldn't use it in browsers that can actually make use of it. We can use a fallback. Browsers that don't support the picture tag, or webp files, will just ignore those lines and render the fallback image in the img tag.
+```diff
++ Improvement: 32%
+```
+
+```html
+<picture>
+  <source srcset="{{cover_image}}" type="image/webp">
+  <source srcset="{{cover_image_fallback}}" type="image/jpeg">
+  <img src="{{cover_image_fallback}}" alt="{{genre}}">
+</picture>
+```
+
+<details>
+  <summary>Network results based on a slow 3G network</summary>
+
+**Jpeg**
+
+![jpeg test results](assets/jpeg.png)
+
+**WebP**
+
+![webp test results](assets/webp.png)
+
+</details>
+
+
+## Notes (This will be removed)
 * Kijk naar NPM scripts
 * Kijk naar gulp of nieuwere tools dan Gulp
 
-
 HET BUILDEN VAN DE HELE APP VIA NPM
-
 
 - Minification
 - file revisioning (rev-manifest)
@@ -138,33 +187,10 @@ HET BUILDEN VAN DE HELE APP VIA NPM
 - Je kan styles asynchroon inladen (LoadCSS)
 - Critical CSS - minimum css nodig (lijn trekken)
 
-
-
-
-
-<!-- What external data source is featured in your project and what are its properties 🌠 -->
-## Data
-
-### Featured data
-
-### Retrieve
-
-## Code structure
-I created two diagrams to show the actors of my code (actor diagram), whom handle functionality in my app, and what happens in my code (interaction diagram).
-
-> * 🛠 [Draw](https://draw.io)
-
-### Actor diagram
-![Actor diagram](assets/actor-diagram.png)
-
-### Interaction diagram
-![Interaction diagram](assets/interaction-diagram.png)
-
 <!-- Maybe a checklist of done stuff and stuff still on your wishlist? ✅ -->
 ## Checklist
 - [x] Filled
 - [ ] Empty
-
 
 <!-- Maybe someone helped me 🤔-->
 ## Credits
