@@ -80,6 +80,7 @@ git clone https://github.com/Mennauu/performance-matters-1819
 ## Optimalisations
 
 ### First view
+___
 
 #### Compression
 The first thing I did was add compression. Brotli compression seems to be the most efficient.
@@ -116,6 +117,8 @@ CSS: Size 1.4 KB | Time 2.03s
 ```
 </details>
 
+___
+
 #### Minifying
 I don't use JavaScript (client-side) so the only meaningful files to minify are css files.
 
@@ -136,6 +139,8 @@ Size: 1.7 KB | Time: 2.25s
 Size: 1.4 KB | Time: 2.08s
 ```
 </details>
+
+___
 
 #### Images to WebP
 Support is weak for WebP, but that doesn't mean we shouldn't use it in browsers that can actually make use of it. We can use a fallback. Browsers that don't support the picture tag, or webp files, will just ignore those lines and render the fallback image in the img tag.
