@@ -1,4 +1,6 @@
 const shrinkRay = require('shrink-ray-current')
+// const preCompressedAssets = require('pre-compressed-assets');
+// const gzipStatic = require('connect-gzip-static');
 const path = require('path')
 const staticify = require('staticify')(path.join(__dirname, 'public'))
 const express = require('express')
@@ -9,6 +11,8 @@ const port = 3000
 
 // Disable x-powered-by header
 app.disable('x-powered-by')
+// Add compression middleware 
+// app.use(gzipStatic(__dirname + '/public'))
 // Brotli files compression, add etag and caching
 app.use(shrinkRay())
 // serve static files
