@@ -87,6 +87,7 @@ The first thing I did was add compression. Brotli compression seems to be the mo
 ```diff
 + HTML size reduction 71,4%
 + CSS size reduction: 54,8%
++ JQUERY size reduction: 
 ```
 <details>
   <summary>Network results based on a slow 3G network</summary>
@@ -96,11 +97,12 @@ The first thing I did was add compression. Brotli compression seems to be the mo
 ```
 HTML: Size 4.2 KB | Time 2.09s
 CSS: Size 3.1 KB | Time 2.27s
+JQUERY: Size 247 KB | Time 8.14s
 
-27 requests | 109 KB transferred | Finish 13.49s | DOMContentLoaded: 2.10s | Load 11.47s
+28 requests | 1326 KB transferred | Finish 15.31s | DOMContentLoaded: 12.34s | Load 13.29s
 ```
 
-**With Gzip**
+**With Gzip (no jQuery)**
 ```
 HTML: Size 1.2 KB | Time 2.01s
 CSS: Size 1.4 KB | Time 2.04s
@@ -112,18 +114,20 @@ CSS: Size 1.4 KB | Time 2.04s
 ```
 HTML: Size 1.0 KB | Time 2.01s
 CSS: Size 1.4 KB | Time 2.03s
+JQUERY: Size: 66.9 KB | Time 3.65s
 
-27 requests | 105 KB transferred | Finish 13.24s | DOMContentLoaded: 2.06s | Load 11.22s
+28 requests | 138 KB transferred | Finish 14.41s | DOMContentLoaded: 6.18s | Load 12.39s
 ```
 </details>
 
 ___
 
 #### Minifying
-I don't use JavaScript (client-side) so the only meaningful files to minify are css files.
+I minified CSS and JavaScript (jQuery)
 
 ```diff
 + CSS size reduction: 17,7%
++ JQUERY size reduction: 63.4%
 ```
 <details>
   <summary>Network results based on a slow 3G network</summary>
@@ -131,12 +135,14 @@ I don't use JavaScript (client-side) so the only meaningful files to minify are 
 
 **Not minified**
 ```
-Size: 1.7 KB | Time: 2.25s
+CSS: Size 1.7 KB | Time 2.25s
+JQUERY: Size: 66.9 KB | Time 3.65s
 ```
 
 **Minified**
 ```
 Size: 1.4 KB | Time: 2.08s
+jQUERY: 24.5 KB | Time 2.78s
 ```
 </details>
 
@@ -170,30 +176,42 @@ Support is weak for WebP, but that doesn't mean we shouldn't use it in browsers 
 
 </details>
 
-### Render view
+___
+
+### Repeat view
 
 #### Unique hash digits
-Use Gulp, Webpack, or similar to add unique hash digits to your css, js, and image files (like app-67ce7f3483.css)
+[Staticify](https://www.npmjs.com/package/staticify) was used to add unique hash digits to css and js files (like app-67ce7f3483.css).
 
 #### Caching
-For JavaScript ,CSS, and image files, set Cache-Control: public, max-age=31536000, no Etag, no Last-Modified settings.
+**HTML files**
+* Cache-Control: no-cache
+* With Etag
+* No X-Powered-By
 
-For HTML files, use Cache-Control: no-cache, and Etag.
+**JavaScript, CSS, and image files** 
+* Cache-Control: public, max-age=31536000
+* No Etag, 
+* No Last-Modified
+* No X-Powered-By
 
-Removed 'X-Powered-By' for all
+#### Results
+<details>
+  <summary>First view network results</summary>
+
+![first view](assets/first-view.png)
+
+</details>
+
+<details>
+  <summary>Repeat view network results</summary>
+
+![repeat view](assets/repeat-view.png)
+
+</details>
 
 
-
-
-
-
-
-
-
-
-
-
-## Notes (This will be removed)
+<!-- ## Notes (This will be removed)
 * Kijk naar NPM scripts
 * Kijk naar gulp of nieuwere tools dan Gulp
 
@@ -215,12 +233,16 @@ HET BUILDEN VAN DE HELE APP VIA NPM
 - fontFaceObserver (add class async (after font is loaded)) with a cookie and class
 - Defer, async scripts
 - Je kan styles asynchroon inladen (LoadCSS)
-- Critical CSS - minimum css nodig (lijn trekken)
+- Critical CSS - minimum css nodig (lijn trekken) -->
 
 <!-- Maybe a checklist of done stuff and stuff still on your wishlist? ✅ -->
 ## Checklist
-- [x] Filled
-- [ ] Empty
+- [x] Rebuild client side app to server side app
+- [x] Add Handlebars
+- [x] Minifiy files
+- [X] Add unique hash digits to css and javascript files
+- [X] Add (pre)compression
+- [X] Set cache headers (for caching)
 
 <!-- Maybe someone helped me 🤔-->
 ## Credits
