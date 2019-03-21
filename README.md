@@ -84,12 +84,12 @@ git clone https://github.com/Mennauu/performance-matters-1819
 #### Compression
 The first thing I did was add compression. Brotli compression seems to be the most efficient.
 ```diff
-+ HTML file reduction 71,4%
-+ CSS file reduction: 54,8%
++ HTML size reduction 71,4%
++ CSS size reduction: 54,8%
 ```
 <details>
   <summary>Network results based on a slow 3G network</summary>
-
+<br>
 
 **Without compression**
 ```
@@ -120,11 +120,11 @@ CSS: Size 1.4 KB | Time 2.03s
 I don't use JavaScript (client-side) so the only meaningful files to minify are css files.
 
 ```diff
-+ CSS file reduction: 17,7%
++ CSS size reduction: 17,7%
 ```
 <details>
   <summary>Network results based on a slow 3G network</summary>
-
+<br>
 
 **Not minified**
 ```
@@ -140,7 +140,7 @@ Size: 1.4 KB | Time: 2.08s
 #### Images to WebP
 Support is weak for WebP, but that doesn't mean we shouldn't use it in browsers that can actually make use of it. We can use a fallback. Browsers that don't support the picture tag, or webp files, will just ignore those lines and render the fallback image in the img tag.
 ```diff
-+ Improvement: 32%
++ Total images size reduction: 32%
 ```
 
 ```html
@@ -153,7 +153,7 @@ Support is weak for WebP, but that doesn't mean we shouldn't use it in browsers 
 
 <details>
   <summary>Network results based on a slow 3G network</summary>
-
+<br>
 
 **Jpeg**
 
