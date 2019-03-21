@@ -80,15 +80,17 @@ git clone https://github.com/Mennauu/performance-matters-1819
 ## Optimalisations
 
 ### First view
+___
 
 #### Compression
 The first thing I did was add compression. Brotli compression seems to be the most efficient.
 ```diff
-+ HTML improvement 71,4%
-+ CSS improvement: 54,8%
++ HTML size reduction 71,4%
++ CSS size reduction: 54,8%
 ```
 <details>
   <summary>Network results based on a slow 3G network</summary>
+<br>
 
 **Without compression**
 ```
@@ -115,14 +117,17 @@ CSS: Size 1.4 KB | Time 2.03s
 ```
 </details>
 
+___
+
 #### Minifying
 I don't use JavaScript (client-side) so the only meaningful files to minify are css files.
 
 ```diff
-+ Improvement: 17,7%
++ CSS size reduction: 17,7%
 ```
 <details>
   <summary>Network results based on a slow 3G network</summary>
+<br>
 
 **Not minified**
 ```
@@ -135,10 +140,12 @@ Size: 1.4 KB | Time: 2.08s
 ```
 </details>
 
+___
+
 #### Images to WebP
 Support is weak for WebP, but that doesn't mean we shouldn't use it in browsers that can actually make use of it. We can use a fallback. Browsers that don't support the picture tag, or webp files, will just ignore those lines and render the fallback image in the img tag.
 ```diff
-+ Improvement: 32%
++ Total images size reduction: 32%
 ```
 
 ```html
@@ -151,6 +158,7 @@ Support is weak for WebP, but that doesn't mean we shouldn't use it in browsers 
 
 <details>
   <summary>Network results based on a slow 3G network</summary>
+<br>
 
 **Jpeg**
 
@@ -161,6 +169,28 @@ Support is weak for WebP, but that doesn't mean we shouldn't use it in browsers 
 ![webp test results](assets/webp.png)
 
 </details>
+
+### Render view
+
+#### Unique hash digits
+Use Gulp, Webpack, or similar to add unique hash digits to your css, js, and image files (like app-67ce7f3483.css)
+
+#### Caching
+For JavaScript ,CSS, and image files, set Cache-Control: public, max-age=31536000, no Etag, no Last-Modified settings.
+
+For HTML files, use Cache-Control: no-cache, and Etag.
+
+Removed 'X-Powered-By' for all
+
+
+
+
+
+
+
+
+
+
 
 
 ## Notes (This will be removed)

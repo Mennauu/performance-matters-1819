@@ -5,18 +5,24 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "minifyCSS": "cleancss -o public/css/styles.min.css assets/css/styles.css"
+    "minifyCSS": "cleancss -o public/css/styles.min.css assets/css/styles.css",
+    "compress": "bread-compressor public"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bread-compressor-cli": "^1.0.5",
     "clean-css-cli": "^4.2.1",
     "compression": "^1.7.3",
+    "connect-gzip-static": "^2.1.1",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.2",
     "express-minify-html": "^0.12.0",
+    "express-static-gzip": "^1.1.3",
     "handlebars": "^4.1.0",
+    "pre-compressed-assets": "^2.1.1",
     "shrink-ray-current": "^3.0.2",
-    "terser": "^3.17.0"
+    "terser": "^3.17.0",
+    "uglify-js": "^3.5.1"
   }
 }
