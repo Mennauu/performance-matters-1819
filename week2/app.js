@@ -1,6 +1,5 @@
 const shrinkRay = require('shrink-ray-current')
-// const preCompressedAssets = require('pre-compressed-assets');
-// const gzipStatic = require('connect-gzip-static');
+// const expressStaticGzip = require("express-static-gzip");
 const path = require('path')
 const staticify = require('staticify')(path.join(__dirname, 'public'))
 const express = require('express')
@@ -11,8 +10,14 @@ const port = 3000
 
 // Disable x-powered-by header
 app.disable('x-powered-by')
+
 // Add compression middleware 
-// app.use(gzipStatic(__dirname + '/public'))
+// app.use(expressStaticGzip('public', {
+//   index: false,
+//   enableBrotli: true,
+//   orderPreference: ['br']
+// }))
+
 // Brotli files compression, add etag and caching
 app.use(shrinkRay())
 // serve static files
@@ -21,9 +26,11 @@ app.use(express.static(__dirname + '/public', {
   lastModified: "",
   etag: ""
 }))
+
 // Prepend static assets with a version string
 app.use(staticify.middleware)
 app.locals = { getVersionedPath: staticify.getVersionedPath }
+
 // Handlebars
 app.set('view engine', 'hbs')
 app.engine('hbs', hbs({
