@@ -1,20 +1,20 @@
 <h1 align="center">Performance Matters @cmda-minor-web · 2018-2019</h1>
 
-<p align="center"><b>Transfering the <a href="https://github.com/Mennauu/project-1-1819" target="_blank">OBA client side web app</a> to a server side rendered application. Also, a series of optimisations have been implemented to improve the performance of the application. It's also avaiable offline.</b>
+<p align="center"><b>Coverting the <a href="https://github.com/Mennauu/project-1-1819" target="_blank">OBA client side web app</a> to a server side rendered application. Also, a series of optimisations have been implemented to improve the performance of the application. It also works "offline".</b>
 </p>
 
 <br>
 
 <p align="center">
-  <a href="https://mennauu.github.io/web-app-from-scratch-18-19/week1">
+  <a href="https://github.com/Mennauu/performance-matters-1819/tree/master/week1">
     <img src="https://img.shields.io/badge/week-1-brightgreen.svg?style=flat-square" alt="week1">
   </a>
   &nbsp;&nbsp;&nbsp;
-  <a href="https://mennauu.github.io/web-app-from-scratch-18-19/week2">
+  <a href="https://github.com/Mennauu/performance-matters-1819/tree/master/week2">
     <img src="https://img.shields.io/badge/week-2-red.svg?style=flat-square" alt="week2">
   </a>
   &nbsp;&nbsp;&nbsp;
-  <a href="https://mennauu.github.io/web-app-from-scratch-18-19/week3">
+  <a href="https://github.com/Mennauu/performance-matters-1819/tree/master/week3">
     <img src="https://img.shields.io/badge/week-3-red.svg?style=flat-square" alt="week3">
   </a>
   &nbsp;&nbsp;&nbsp;
@@ -31,7 +31,7 @@
 
 <!-- ☝️ replace this description with a description of your own work -->
 ## Introduction
-[ Description ]
+In this course we will convert the client side web application made earlier at the OBA to a server side rendered application. We are also going to implement a series of optimisations to improve the performance of the application. Ultimately we ensure that the application is available offline.
 
 Some resources possess an emoticon to help you understand which type of content you may find:
 
@@ -46,22 +46,18 @@ You can find a live demo right here: https://mennauu.github.io/performance-matte
 
 - [Installation](#installation)
 - [Interactions](#interactions)
-- [Data](#data)
-  - [Authentication and limit](#authentication-and-limit)
-  - [Featured data](#featured-data)
-  - [Retrieve](#retrieve)
-  - [Cache](#cache)
-- [Code structure](#code-structure)
-  - [Actor diagram](#authentication-and-limit)
-  - [Interaction diagram](#authentication-and-limit)
+- [Optimisations](#data)
+  - [First view](#first-view)
+    - [Compression](#compression)
+    - [Minifying](#minifying)
+    - [Images to WebP](#images-to-webp)
+  - [Repeat view](#repeat-view)
+    - [Unique hash digits](#unique-hash-digits)
+    - [Caching](#caching)
+    - [Results](#results)
 - [Checklist](#checklist)
 - [Credits](#credits)
 - [Sources](#sources)
-  - [API](#api)
-  - [Router](#router)
-  - [Async and await](#async-and-await)
-  - [General JavaScript](#general-javascript)
-  - [Diagrams](#diagrams)
 - [License](#license)
 
 <!-- How about a section that describes how to install this project? 🤓 -->
@@ -77,7 +73,7 @@ git clone https://github.com/Mennauu/performance-matters-1819
 ```
 4. 
 
-## Optimalisations
+## Optimisations
 
 ### First view
 ___
@@ -87,7 +83,7 @@ The first thing I did was add compression. Brotli compression seems to be the mo
 ```diff
 + HTML size reduction 71,4%
 + CSS size reduction: 54,8%
-+ JQUERY size reduction: 
++ JQUERY size reduction: 72,9%
 ```
 <details>
   <summary>Network results based on a slow 3G network</summary>
