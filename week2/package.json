@@ -5,8 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "minifyCSS": "cleancss -o public/css/styles.min.css assets/css/styles.css",
-    "compress": "bread-compressor public"
+    "minifyCSS": "cleancss -o public/styles.min.css assets/css/styles.css",
+    "revision": "node scripts/unique-hash.js",
+    "compress": "bread-compressor --brotli-quality=11 public"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +20,12 @@
     "express-handlebars": "^3.0.2",
     "express-minify-html": "^0.12.0",
     "express-static-gzip": "^1.1.3",
+    "gulp": "^4.0.0",
+    "gulp-rev": "^9.0.0",
+    "gulp-rev-all": "^1.0.0",
+    "gulp-rev-collector": "^1.3.1",
+    "gulp-rev-delete-original": "^0.2.3",
+    "gulp-rev-replace": "^0.4.4",
     "handlebars": "^4.1.0",
     "pre-compressed-assets": "^2.1.1",
     "shrink-ray-current": "^3.0.2",

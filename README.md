@@ -78,8 +78,36 @@ git clone https://github.com/Mennauu/performance-matters-1819
 ### First view
 ___
 
+#### Minifying
+I minified CSS using [Clean CSS](https://www.npmjs.com/package/clean-css) and jQuery using an online tool called [JavaScript Minifer](https://javascript-minifier.com/).
+
+```diff
++ CSS size reduction: 17,7%
++ JQUERY size reduction: 63.4%
+```
+<details>
+  <summary>Network results based on a slow 3G network</summary>
+<br>
+
+**Not minified**
+```
+CSS: Size 1.7 KB | Time 2.25s
+JQUERY: Size: 66.9 KB | Time 3.65s
+```
+
+**Minified**
+```
+Size: 1.4 KB | Time: 2.08s
+jQUERY: 24.5 KB | Time 2.78s
+```
+</details>
+
+___
+
 #### Compression
-The first thing I did was add compression. Brotli compression seems to be the most efficient.
+I used [Compression](https://www.npmjs.com/package/compression) to compress files to GZIP. I used [Shrink Ray](https://www.npmjs.com/package/shrink-ray) to compress files to Brotli.
+
+Brotli compression seems to be the most efficient.
 ```diff
 + HTML size reduction 71,4%
 + CSS size reduction: 54,8%
@@ -118,31 +146,49 @@ JQUERY: Size: 66.9 KB | Time 3.65s
 
 ___
 
-#### Minifying
-I minified CSS and JavaScript (jQuery)
+#### Precompression
+Precompression contained a lot of steps:
 
-```diff
-+ CSS size reduction: 17,7%
-+ JQUERY size reduction: 63.4%
+1. I used [Bread Compressor CLI](https://www.npmjs.com/package/bread-compressor-cli) to compress all minified JavaScript and CSS files to gzip and brotli.
+2. I used [Gulp](https://www.npmjs.com/package/gulp) and [Gulp Rev](https://www.npmjs.com/package/gulp-rev) to give unique hash digits to all JavaScript, CSS, gzip and brotli files and create a manifest.
+```javascript
+gulp.src(['public/*.{css,js,br,gz}'])
+  .pipe(rev())
+  .pipe(gulp.dest('public/'))
+  .pipe(rev.manifest('rev-manifest.json'))
+  .pipe(gulp.dest('public/'))
 ```
+3. I used [Gulp Rev Collector](https://www.npmjs.com/package/gulp-rev-collector) to collect data from the manifest and replace links in html (to hashed links)
+
+```javascript
+gulp.src(["public/rev-manifest.json", "views/layouts/default.hbs"])
+  .pipe(revCollecter({ replaceReved: true }))
+  .pipe(gulp.dest("views/layouts/"))
+```
+4. I used middleware to serve compressed files (credits to [Maikel](https://github.com/Maikxx))
 <details>
-  <summary>Network results based on a slow 3G network</summary>
-<br>
+  <summary>Expand to see code of middelware</summary>
 
-**Not minified**
-```
-CSS: Size 1.7 KB | Time 2.25s
-JQUERY: Size: 66.9 KB | Time 3.65s
-```
+```javascript
+app.get(['*.js', '*.css'], (req, res, next) => {
+  const encoding = req.headers['accept-encoding']
+  const extensionIndex = req.originalUrl.lastIndexOf('.')
+  const extension = req.originalUrl.slice(extensionIndex)
 
-**Minified**
-```
-Size: 1.4 KB | Time: 2.08s
-jQUERY: 24.5 KB | Time 2.78s
+  if (encoding && encoding.includes('br')) {
+    req.url = `${req.url}.br`
+    res.set('Content-Encoding', 'br')
+  } else if (encoding && encoding.includes('gzip')) {
+    req.url = `${req.url}.gz`
+    res.set('Content-Encoding', 'gzip')
+  }
+
+  res.set('Content-Type', extension === '.js' ? 'text/javascript' : 'text/css')
+  next()
+})
 ```
 </details>
 
-___
 
 #### Images to WebP
 Support is weak for WebP, but that doesn't mean we shouldn't use it in browsers that can actually make use of it. We can use a fallback. Browsers that don't support the picture tag, or webp files, will just ignore those lines and render the fallback image in the img tag.
