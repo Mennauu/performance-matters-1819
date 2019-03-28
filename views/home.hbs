@@ -1,0 +1,16 @@
+<header>
+  <h1>Ontdek luisterboeken bij de OBA</h1>
+</header>
+
+<section>
+  {{#each data}}
+  <a href="{{genre}}" class="subject">
+    <picture>
+      <source srcset="{{cover_image}}" type="image/webp">
+      <source srcset="{{cover_image_fallback}}" type="image/jpeg">
+      <img src="{{cover_image_fallback}}" alt="{{genre}}">
+    </picture>
+    <span>{{genre}}</span>
+  </a>
+  {{/each}}
+</section>

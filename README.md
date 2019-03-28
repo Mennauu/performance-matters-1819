@@ -25,7 +25,7 @@
 
 <br>
 
-![preview](assets/preview.png)
+![preview](readme-assets/preview.png)
 
 <br>
 
@@ -48,13 +48,13 @@ You can find a live demo right here: https://mennauu.github.io/performance-matte
 - [Interactions](#interactions)
 - [Optimisations](#data)
   - [First view](#first-view)
-    - [Compression](#compression)
     - [Minifying](#minifying)
+    - [Compression](#compression)
     - [Images to WebP](#images-to-webp)
+    - [Precompression](#precompression)
   - [Repeat view](#repeat-view)
-    - [Unique hash digits](#unique-hash-digits)
     - [Caching](#caching)
-    - [Results](#results)
+  - [Results](#results)
 - [Checklist](#checklist)
 - [Credits](#credits)
 - [Sources](#sources)
@@ -71,7 +71,18 @@ cd /~path
 ```bash
 git clone https://github.com/Mennauu/performance-matters-1819
 ```
-4. 
+4. Change directory to repository
+```bash
+cd performance-matters-1819
+```
+5. Install dependencies from [package.json](https://github.com/Mennauu/performance-matters-1819/blob/master/week2/package.json)
+```bash
+npm install
+```
+6. Run application with [Node](https://nodejs.org/en/)
+```bash
+node app.js
+```
 
 ## Optimisations
 
@@ -210,20 +221,17 @@ Support is weak for WebP, but that doesn't mean we shouldn't use it in browsers 
 
 **Jpeg**
 
-![jpeg test results](assets/jpeg.png)
+![jpeg test results](readme-assets/jpeg.png)
 
 **WebP**
 
-![webp test results](assets/webp.png)
+![webp test results](readme-assets/webp.png)
 
 </details>
 
 ___
 
 ### Repeat view
-
-#### Unique hash digits
-[Staticify](https://www.npmjs.com/package/staticify) was used to add unique hash digits to css and js files (like app-67ce7f3483.css).
 
 #### Caching
 **HTML files**
@@ -237,25 +245,23 @@ ___
 * No Last-Modified
 * No X-Powered-By
 
-#### Results
+### Results
 <details>
   <summary>First view network results</summary>
 
-![first view](assets/first-view.png)
+![first view](readme-assets/first-view.png)
 
 </details>
 
 <details>
   <summary>Repeat view network results</summary>
 
-![repeat view](assets/repeat-view.png)
+![repeat view](readme-assets/repeat-view.png)
 
 </details>
 
 
 <!-- ## Notes (This will be removed)
-* Kijk naar NPM scripts
-* Kijk naar gulp of nieuwere tools dan Gulp
 
 HET BUILDEN VAN DE HELE APP VIA NPM
 
@@ -285,13 +291,28 @@ HET BUILDEN VAN DE HELE APP VIA NPM
 - [X] Add unique hash digits to css and javascript files
 - [X] Add (pre)compression
 - [X] Set cache headers (for caching)
+- [ ] Implement a ServiceWorker
 
 <!-- Maybe someone helped me 🤔-->
 ## Credits
 
+**[Maikel](https://github.com/Maikxx)**: for his middleware which serves precompressed files
+
 <!-- Maybe I used some awesome sources that I can mention 🤔-->
 ## Sources
 Underneath you will find all the sources that were previously mentioned throughout the document and some others which were helpful.
+
+> * 🛠 [Clean CSS](https://www.npmjs.com/package/clean-css)
+> * 🛠 [JavaScript Minifer](https://javascript-minifier.com/)
+> * 🛠 [Compression](https://www.npmjs.com/package/compression)
+> * 🛠 [Shrink Ray](https://www.npmjs.com/package/shrink-ray)
+> * 🛠 [Bread Compressor CLI](https://www.npmjs.com/package/bread-compressor-cli)
+> * 🛠 [Gulp](https://www.npmjs.com/package/gulp) 
+> * 🛠 [Gulp Rev](https://www.npmjs.com/package/gulp-rev)
+> * 🛠 [Gulp Rev Collector](https://www.npmjs.com/package/gulp-rev-collector)
+
+> * 📖 [Mozzila: Picture element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture)
+> * 📖 [WikiHow: Disable JavaScript](https://www.wikihow.com/Disable-JavaScript)
 
 <!-- How about a license here? 📜 (or is it a licence?) 🤷 -->
 ## License 
