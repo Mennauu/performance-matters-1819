@@ -11,7 +11,7 @@
   </a>
   &nbsp;&nbsp;&nbsp;
   <a href="https://github.com/Mennauu/performance-matters-1819/tree/master/week2">
-    <img src="https://img.shields.io/badge/week-2-red.svg?style=flat-square" alt="week2">
+    <img src="https://img.shields.io/badge/week-2-brigtgreen.svg?style=flat-square" alt="week2">
   </a>
   &nbsp;&nbsp;&nbsp;
   <a href="https://github.com/Mennauu/performance-matters-1819/tree/master/week3">
@@ -300,7 +300,7 @@ self.addEventListener('install', (event) => {
 })
 ```
 
-4. We fetch results from the ServiceWorker
+4. We fetch data from the ServiceWorker
 ```JavaScript
 self.addEventListener('fetch', (event) => {
   event.respondWith(caches.match(event.request)
