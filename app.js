@@ -3,7 +3,7 @@ const express = require('express')
 const hbs = require('express-handlebars')
 const routeHandler = require('./server/js/routeHandler.js')
 const app = express()
-const port = 3011
+const port = process.env.PORT || 3000
 
 // Disable x-powered-by header
 app.disable('x-powered-by')
