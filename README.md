@@ -1,6 +1,6 @@
 <h1 align="center">Performance Matters @cmda-minor-web · 2018-2019</h1>
 
-<p align="center"><b>Coverting the <a href="https://github.com/Mennauu/project-1-1819" target="_blank">OBA client side web app</a> to a server side rendered application. Also, a series of optimisations have been implemented to improve the performance of the application. It also works "offline".</b>
+<p align="center"><b>Coverting the <a href="https://github.com/Mennauu/project-1-1819" target="_blank">OBA client side web app</a> to a server side rendered application. Also, a series of optimisations have been implemented to improve the performance of the application. It also works offline.</b>
 </p>
 
 <br>
@@ -55,6 +55,7 @@ You can find a live demo right here: https://mennauu.github.io/performance-matte
   - [Repeat view](#repeat-view)
     - [Caching](#caching)
   - [Results](#results)
+  - [ServiceWorker](#serviceworker)
 - [Checklist](#checklist)
 - [Credits](#credits)
 - [Sources](#sources)
@@ -260,38 +261,70 @@ ___
 
 </details>
 
+### ServiceWorker
 
-<!-- ## Notes (This will be removed)
+1. We first register the ServiceWorker
 
-HET BUILDEN VAN DE HELE APP VIA NPM
+```JavaScript
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('/sw.js')
+      .then((registration) => registration.update)
+  })
+}
+```
 
-- Minification
-- file revisioning (rev-manifest)
-- Brotli ipv GZIP
-- precompression (Static site)
-- img revision tag (304 - 200)
-- srcset and sizes attributes 
-- Picture html tag (client hints) - webp met fallbacks
-- Resource hints
-- DNS-PREFETCH
-- link preconnect, prefetch, preload, prerender
-- font subsetting
-- font rendering controls (font-display: swap)
-- Reflow verminderen door op de fallback font line-height en letter-spacing te plaatsen (Font style Matcher)
-- fontFaceObserver (add class async (after font is loaded)) with a cookie and class
-- Defer, async scripts
-- Je kan styles asynchroon inladen (LoadCSS)
-- Critical CSS - minimum css nodig (lijn trekken) -->
+2. We set a name and add which files to cache
+
+```JavaScript
+const staticCacheName = 'oba-cache-v1'
+const filesToCache = [
+  '/',
+  '/styles-60bf7a2ac9.min.css',
+  '/main.js',
+  '/jquery-fdef21f018.min.js',
+  '/images/favicon.png',
+  '/images/coverlist1.webp',
+  '/Sprookjes',
+  '/Sprookjes/=9789048719341'
+]
+```
+
+3. We install the ServiceWorker
+```JavaScript
+self.addEventListener('install', (event) => {
+  event.waitUntil(caches.open(staticCacheName)
+    .then(cache => cache.addAll(filesToCache))
+  )
+})
+```
+
+4. We fetch results from the ServiceWorker
+```JavaScript
+self.addEventListener('fetch', (event) => {
+  event.respondWith(caches.match(event.request)
+    .then((response) => {
+      return response || fetch(event.request)
+    })
+  )
+})
+```
+
+5. Succes! You can now visit the website, offline 😄
+
+![Service worker](readme-assets/serviceworker.gif)
 
 <!-- Maybe a checklist of done stuff and stuff still on your wishlist? ✅ -->
 ## Checklist
 - [x] Rebuild client side app to server side app
 - [x] Add Handlebars
 - [x] Minifiy files
-- [X] Add unique hash digits to css and javascript files
-- [X] Add (pre)compression
-- [X] Set cache headers (for caching)
-- [ ] Implement a ServiceWorker
+- [x] Add unique hash digits to css and javascript files
+- [x] Add (pre)compression
+- [x] Set cache headers (for caching)
+- [x] Implement a ServiceWorker
+- [x] Make website work offline
 
 <!-- Maybe someone helped me 🤔-->
 ## Credits
@@ -313,6 +346,9 @@ Underneath you will find all the sources that were previously mentioned througho
 
 > * 📖 [Mozzila: Picture element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture)
 > * 📖 [WikiHow: Disable JavaScript](https://www.wikihow.com/Disable-JavaScript)
+> * 📖 [Google: Caching files with Service Worker](https://developers.google.com/web/ilt/pwa/caching-files-with-service-worker)
+> * 📖 [Captech: My Experience using serviceworkers](https://www.captechconsulting.com/blogs/my-experience-using-service-workers)
+> * 📖 [Google: Adding a Service Worker and Offline](https://developers.google.com/web/fundamentals/codelabs/offline/)
 
 <!-- How about a license here? 📜 (or is it a licence?) 🤷 -->
 ## License 

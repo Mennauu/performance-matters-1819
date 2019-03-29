@@ -1,10 +1,9 @@
 const shrinkRay = require('shrink-ray-current')
 const express = require('express')
 const hbs = require('express-handlebars')
-const path = require('path')
 const routeHandler = require('./server/js/routeHandler.js')
 const app = express()
-const port = 3000
+const port = 3011
 
 // Disable x-powered-by header
 app.disable('x-powered-by')

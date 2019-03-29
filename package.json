@@ -7,7 +7,7 @@
     "start": "node app.js",
     "minifyCSS": "cleancss -o public/styles.min.css assets/css/styles.css",
     "revision": "node scripts/unique-hash.js",
-    "compress": "bread-compressor --brotli-quality=11 public"
+    "compress": "bread-compressor --brotli-quality=11 public/sw.js"
   },
   "author": "",
   "license": "ISC",
