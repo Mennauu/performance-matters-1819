@@ -18,6 +18,10 @@
     <img src="https://img.shields.io/badge/week-3-red.svg?style=flat-square" alt="week3">
   </a>
   &nbsp;&nbsp;&nbsp;
+  <a href="https://performance-matters--1819.herokuapp.com/">
+    <img src="https://img.shields.io/badge/demo-LIVE-brightgreen.svg?style=flat-square" alt="demo">
+  </a>
+  &nbsp;&nbsp;&nbsp;
   <a href="https://github.com/Mennauu/web-app-from-scratch-18-19/blob/master/LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square" alt="License">
   </a>
@@ -38,8 +42,6 @@ Some resources possess an emoticon to help you understand which type of content 
 - 📖: Documentation or article
 - 🛠: Tool or library
 - 📹: Video
-
-You can find a live demo right here: https://mennauu.github.io/performance-matters-1819/week3
 
 <!-- Maybe a table of contents here? 📚 -->
 ## Table of Contents
